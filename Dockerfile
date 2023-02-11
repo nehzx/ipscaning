@@ -15,7 +15,7 @@ COPY run.sh .
 
 RUN apk --no-cache add bash curl \
     && chmod +x /root/run.sh \
-    && echo '30 22 * * *  ./root/run.sh' > /etc/crontabs/root 
+    && echo '30 22 * * *  bash /root/run.sh' > /etc/crontabs/root 
 
 ENV AS=
 ENV FEISHU_WEB_HOOK=
