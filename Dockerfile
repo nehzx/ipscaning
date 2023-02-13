@@ -13,12 +13,16 @@ WORKDIR /root
 COPY --from=builder  /root/CloudflareSpeedTest/CloudflareSpeedTest .
 COPY run.sh .
 
-RUN apk --no-cache add bash curl \
-    && chmod +x /root/run.sh \
-    && echo '30 22 * * *  bash /root/run.sh' > /etc/crontabs/root 
-
+ENV TZ=Asia/Shanghai 
 ENV AS=
 ENV FEISHU_WEB_HOOK=
+
+RUN apk --no-cache add bash curl tzdata \
+    && chmod +x /root/run.sh \
+    && echo '30 22 * * *  bash /root/run.sh' > /etc/crontabs/root \
+    && echo "${TZ}" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime 
+
 ENTRYPOINT ["/usr/sbin/crond", "-f"]
 
 
