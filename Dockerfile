@@ -11,6 +11,7 @@ FROM alpine
 WORKDIR /root
 
 COPY --from=builder  /root/CloudflareSpeedTest/CloudflareSpeedTest .
+COPY --from=builder  /root/CloudflareSpeedTest/ip.txt .
 COPY run.sh .
 
 ENV TZ=Asia/Shanghai 
