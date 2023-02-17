@@ -11,7 +11,7 @@ processing_results() {
 
 if [[ -z $AS ]]; then
 
-	./CloudflareSpeedTest -tl 200 -allip  -dn 10000
+	./CloudflareSpeedTest -tl 200  -dn 30
 
 	if [ -z $FEISHU_WEB_HOOK ]; then
 		echo "web hook url null"
